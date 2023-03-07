@@ -8,5 +8,5 @@
 
 <script setup>
 
-const { input } = defineProps(['input'])
+
 </script>

@@ -21,7 +21,7 @@
 const user = useSupabaseUser()
 const { auth } = useSupabaseAuthClient()
 const router = useRouter()
-// Login method using providers
+
 watchEffect(() => {
     if (user.value) {
         navigateTo('/')

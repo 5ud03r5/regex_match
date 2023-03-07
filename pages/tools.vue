@@ -3,8 +3,10 @@
 
         <div class="bg-gray-900 text-gray-200 ml-4 mr-4 mb-4 p-2 shadow rounded-lg shadow-2xl overflow-hidden flex flex-col space-y-2 w-[200px] h-max"
             v-for="tool in tools">
-            <a :href="tool.url" class="bg-gray-200 text-gray-800 w-max p-1 rounded-md" target="_blank">{{
-                tool.title }}</a>
+            <a :href="tool.url"
+                class="bg-gray-200 text-gray-800 w-max p-1 shadowCyan rounded-md font-mono hover:bg-gray-700 hover:text-cyan-300"
+                target="_blank">{{
+                    tool.title }}</a>
             <div>{{ tool.short_description }}</div>
 
 
@@ -23,5 +25,19 @@ definePageMeta({
 <style scoped>
 .shadow {
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 25px 0 rgba(0, 0, 0, 0.19);
+}
+
+a:hover {
+    animation: shadow 2s infinite alternate
+}
+
+@keyframes shadow {
+    from {
+        box-shadow: 1px 0px 4px 0 cyan, 1px 0px 15px 1px cyan;
+    }
+
+    to {
+        box-shadow: -1px 0px 10px 1px cyan, 3px 0px 20px 4px cyan;
+    }
 }
 </style>
