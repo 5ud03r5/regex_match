@@ -1,6 +1,6 @@
 <template>
-    <div class="bg-gray-200 h-screen">
-        <nav class="bg-gray-900 text-white p-6 shadow-xl flex justify-end space-x-10">
+    <div class="">
+        <nav class="bg-gray-900 text-white p-6 shadow-xl flex justify-end space-x-10 fixed top-0 w-full z-[1000]">
             <button v-if="user" class="focus:outline-none" @click="logout">Logout</button>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-github"
@@ -12,10 +12,13 @@
 
         </nav>
 
-        <main class="mt-10 mb-10 pr-6 pb-6">
-            <div v-if="user" class="flex space-x-10">
-                <TheSideBar v-if="user" class="shadow-xl" />
-                <slot></slot>
+        <main class=" pl-36 mt-32 mb-10 pr-36 pb-6">
+            <div v-if="user">
+                <TheSideBar class="shadow-xl" />
+                <div class="flex space-x-10 pl-20">
+                    <slot></slot>
+                </div>
+
             </div>
             <div v-if="!user">
                 <slot></slot>
