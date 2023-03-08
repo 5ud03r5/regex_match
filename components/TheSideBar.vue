@@ -1,5 +1,5 @@
 <template>
-    <div class="h-max p-2 rounded-lg shadow-xl  bg-gay-800 w-[62px] flex flex-col space-y-2 bg-gray-800">
+    <div class="h-max p-2 rounded-lg shadow-xl  bg-gay-800 w-[62px] flex flex-col space-y-2 bg-gray-800 ">
 
 
         <NuxtLink to='/' title="regex"
@@ -44,3 +44,9 @@ definePageMeta({
     middleware: 'auth'
 })
 </script>
+<style scoped>
+.router-link-active {
+    color: cyan;
+    background-color: rgba(255, 255, 255, 0.192);
+}
+</style>

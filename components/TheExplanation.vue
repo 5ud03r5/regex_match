@@ -1,5 +1,5 @@
 <template>
-    <div class="p-2 bg-white w-[400px] h-[460px] w-min-[400px] overflow-auto">
+    <div class="p-2 bg-white min-w-min max-w-[250px] h-[460px] w-full shrink overflow-auto">
         <h2 class="text-gray-800 font-mono">Regex match</h2>
         <hr>
         <div class="mb-10">{{ result !== null && result[0] }}</div>

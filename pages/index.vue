@@ -19,6 +19,7 @@
 </template>
 
 <script setup>
+const user = useSupabaseUser()
 const modalOpened = useState('modalOpened', () => false)
 const input = useInput()
 const text = useText()
@@ -42,7 +43,7 @@ const postNewRegex = async (value) => {
     console.log(value)
     await $fetch('/api/repository', {
         method: 'POST',
-        body: { input: input.value, text: text.value, title: value }
+        body: { input: input.value, text: text.value, title: value, owner: user.value.user_metadata.user_name }
     })
     modalOpened.value = false
 

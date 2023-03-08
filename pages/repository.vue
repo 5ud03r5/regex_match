@@ -1,40 +1,45 @@
 <template>
-    <div class=" flex space-x-10 container items-center pr-[20%]">
-        <div class=" flex flex-wrap flex-col space-y-5 justify-center items-center mx-auto w-full">
+    <div class="container items-center ">
+        <div class=" flex flex-col space-y-5 justify-center items-center mx-auto w-full">
+            <SearchBar @search="searchRepository" :placeholder="'Search in repository...'"></SearchBar>
 
-            <div class="flex">
-                <input
-                    class="w-full bg-gray-900 rounded-bl-lg text-gray-100 rounded-tl-lg focus:bg-gray-700 focus:outline-none shadow-xl  p-2"
-                    placeholder="Search in repository..." />
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
-                    class="bi bi-search bg-gray-900 text-gray-100 rounded-br-lg rounded-tr-lg hover:cursor-pointer hover:bg-cyan-400 p-2"
-                    viewBox="0 0 16 16">
-                    <path
-                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                </svg>
+            <div v-if="pending">
+                Loading repository...
             </div>
-
-
-            <div class="bg-gray-900 text-gray-200 ml-4 mr-4 mb-4 p-2 w-full shrink shadow rounded-lg shadow-2xl overflow-hidden flex flex-col space-y-2 h-max"
+            <div v-else
+                class="bg-gray-900 text-gray-200 ml-4 mr-4 mb-4 p-2 w-full shadow rounded-lg shadow-2xl overflow-hidden flex flex-col space-y-2 h-max"
                 v-for="regex in repository">
-                <h1 class="">{{ regex.title }}</h1>
+                <h1 class="font-black text-[22px] font-mono">{{ regex.title }}</h1>
+                <div><a target="_blank" :href="`https://github.com/${regex.owner}`" class="">created
+                        by {{
+                            regex.owner
+                        }}</a></div>
+
                 <div class="bg-gray-700 p-2 rounded-md text-white">{{ regex.regex }}</div>
+
                 <div @click="tryItOut(regex.regex, regex.text)"
-                    class="flex justify-end hover:cursor-pointer hover:text-cyan-300 font-sans">Try it
+                    class="flex justify-end ml-auto hover:cursor-pointer hover:text-cyan-300 font-sans bg-gray-500 p-1 rounded-md">
+                    Try it
                     out</div>
 
             </div>
+
         </div>
 
 
     </div>
 </template>
 <script setup>
-const displaySearch = useState('displaySearch', () => true)
 const text = useText()
 const input = useInput()
 const result = useResult()
-const { repository } = await $fetch('/api/getrepository')
+const uri = useState('uri', () => '/api/getrepository')
+const { data: repository, pending, refresh } = await useLazyAsyncData('repository', async () => await $fetch(uri.value))
+
+const searchRepository = async (value) => {
+    uri.value = `/api/getrepository?search=${value}`
+    refresh('repository')
+}
 
 definePageMeta({
     middleware: 'auth'
