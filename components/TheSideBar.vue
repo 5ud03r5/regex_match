@@ -1,5 +1,5 @@
 <template>
-    <div class="h-max p-2 rounded-lg  bg-gay-800 w-[62px] flex flex-col shadow space-y-2 bg-gray-700 ">
+    <div class="h-max p-2 rounded-lg z-[1] fixed bg-gay-800 w-[62px] flex flex-col shadow space-y-2 bg-gray-700 ">
 
 
         <NuxtLink to='/' title="regex"

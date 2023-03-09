@@ -1,9 +1,9 @@
 <template>
     <div class="">
-        <nav class="bg-gray-800 fixed top-0 w-full z-[2100]">
-            <div class="flex justify-center">
-                <div class="flex p-4 space-x-10 container justify-end "><button v-if="user"
-                        class="focus:outline-none text-white" @click="logout">Logout</button>
+        <nav class="bg-gray-800 fixed top-0 w-full z-[2100] shadowTop">
+            <div class="container mx-auto ">
+                <div class="flex p-4 space-x-10 justify-end "><button v-if="user" class="focus:outline-none text-white"
+                        @click="logout">Logout</button>
                     <a href="https://github.com/5ud03r5" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                             class="bi bi-github text-white" viewBox="0 0 16 16">
@@ -18,9 +18,10 @@
 
         </nav>
 
-        <main class="pl-[20%] mt-32 mb-10 pr-[20%] pb-6">
-            <div v-if="user" class="flex justify-center relative">
-                <TheSideBar class="shadow-xl" />
+        <main class=" mt-32 mb-10  pb-6 container mx-auto">
+
+            <div v-if="user" class="w-3/4 mx-auto">
+                <TheSideBar class="" />
                 <div class="flex space-x-10 pl-20 container">
                     <slot></slot>
                 </div>
@@ -46,5 +47,9 @@ const logout = async () => {
 }
 
 </script>
-<style scoped></style>
+<style scoped>
+.shadowTop {
+    box-shadow: 0px 1px 10px 0px rgba(0, 255, 255, 0.341), 0px 1px 10px 0px rgba(0, 255, 255, 0.385)
+}
+</style>
 
