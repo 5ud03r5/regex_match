@@ -1,9 +1,9 @@
 <template>
-    <div class="min-w-min rounded-xl bg-gray-800  shrink p-1 overflow-auto">
-        <div class="p-2 bg-gray-400 h-full rounded-xl">
+    <div class="min-w-[250px] rounded-xl bg-gray-800 shrink p-1 overflow-auto">
+        <div class="p-2 bg-gray-400 h-full rounded-xl ">
             <h2 class="text-gray-200 mb-2 bg-gray-800 w-max p-1 rounded-lg font-mono">Regex match</h2>
 
-            <div class="bg-gray-300 rounded-lg mb-10 p-2">{{ result !== null && result[0] }}</div>
+            <div v-if="result[0]" class="bg-gray-300 rounded-lg mb-10 p-2">{{ result !== null && result[0] }}</div>
 
             <div v-if="result.groups">
                 <h2 class="text-gray-200 mb-2 bg-gray-800 w-max p-1 rounded-lg font-mono">Regex groups</h2>
