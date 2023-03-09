@@ -1,5 +1,5 @@
 <template>
-    <div class="h-max p-2 rounded-lg shadow-xl  bg-gay-800 w-[62px] flex flex-col space-y-2 bg-gray-800 ">
+    <div class="h-max p-2 rounded-lg  bg-gay-800 w-[62px] flex flex-col shadow space-y-2 bg-gray-700 ">
 
 
         <NuxtLink to='/' title="regex"
@@ -10,13 +10,6 @@
                     d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 1 1 .707.707Zm9.9-.707a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.314.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707ZM6 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5-6.5a.5.5 0 0 0-1 0v2.117L8.257 5.57a.5.5 0 0 0-.514.858L9.528 7.5 7.743 8.571a.5.5 0 1 0 .514.858L10 8.383V10.5a.5.5 0 1 0 1 0V8.383l1.743 1.046a.5.5 0 0 0 .514-.858L11.472 7.5l1.785-1.071a.5.5 0 1 0-.514-.858L11 6.617V4.5Z" />
             </svg>
         </NuxtLink>
-        <NuxtLink to='/guides' title="guides"
-            class="bg-gray-100 p-2 rounded-md hover:shadow-lg hover:cursor-pointer hover:bg-gray-400"><svg
-                xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-book-fill"
-                viewBox="0 0 16 16">
-                <path
-                    d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
-            </svg></NuxtLink>
         <NuxtLink to='/tools' title="tools"
             class="bg-gray-100 p-2 rounded-md hover:shadow-lg hover:cursor-pointer hover:bg-gray-400"><svg
                 xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-tools"
@@ -47,6 +40,10 @@ definePageMeta({
 <style scoped>
 .router-link-active {
     color: cyan;
-    background-color: rgba(255, 255, 255, 0.192);
+    background-color: rgb(6, 0, 29);
+}
+
+.shadow {
+    box-shadow: 0 6px 10px 0 rgb(0, 0, 0), 0 10px 25px 0 rgb(0, 0, 0);
 }
 </style>
