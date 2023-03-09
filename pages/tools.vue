@@ -1,7 +1,7 @@
 <template>
     <div class=" flex flex-wrap container mx-auto items-center">
         <div v-if="pending" class="flex justify-center items-center mx-auto">
-            Loading...
+            <LoadingSpinner></LoadingSpinner>
         </div>
         <div v-else
             class="bg-gray-800 text-gray-200 ml-4 mr-4 mb-4 p-5 shadow rounded-lg shadow-2xl overflow-hidden flex flex-col space-y-2 w-[200px] h-max"

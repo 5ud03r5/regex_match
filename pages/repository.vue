@@ -1,10 +1,12 @@
 <template>
     <div class="container items-center ">
         <div class=" flex flex-col space-y-5 justify-center items-center mx-auto w-full">
-            <SearchBar @search="searchRepository" :placeholder="'Search in repository...'" class="shadow"></SearchBar>
+            <SearchBar @search="searchRepository" :placeholder="'Search in repository...'" class="shadow fixed top-[90px]">
+            </SearchBar>
+
 
             <div v-if="pending">
-                Loading...
+                <LoadingSpinner></LoadingSpinner>
             </div>
             <div v-else
                 class="bg-gray-800 text-gray-200 ml-4 mr-4 mb-4 p-5 w-full shadow rounded-lg shadow-2xl overflow-hidden flex flex-col space-y-4 h-max"
