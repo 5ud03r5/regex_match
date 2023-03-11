@@ -1,29 +1,32 @@
 <template>
-    <div class="flex justify-center flex-col space-y-5 container">
-        <div class="flex space-x-4 ">
-            <div class="bg-gray-800 p-1 shadow rounded-xl w-full">
-                <input spellcheck="false" v-model="input" placeholder="Enter regex..."
-                    class="w-full hover:outline-none rounded-xl bg-gray-800 text-white focus:text-gray-800 focus:bg-gray-400 p-2 text-gray-900  focus:outline-none" />
+    <div class="flex justify-center flex-col space-y-5 container enter">
+        <div class="flex space-x-5">
+            <div class="grow space-y-2">
+                <div class="flex space-x-4 ">
+                    <input spellcheck="false" v-model="input" placeholder="Enter regex..."
+                        class="w-1/5 hover:bg-gray-600 rounded-xl bg-gray-800 text-white focus:text-gray-800 focus:bg-gray-400 p-2 text-gray-900  focus:outline-none"
+                        :style="input.length > 0 && { width: '40%' }" :class="input.length === 0 && 'input'" />
+
+                    <ButtonSubmit v-if="input.length > 0" @click="modalOpened = true" class="shadow" />
+                </div>
+                <div class="bg-gray-800 p-1 shadow rounded-xl">
+                    <div contenteditable="true" ref="editable" v-html="highlightedText" @input="setText($event)"
+                        spellcheck="false"
+                        class=" w-full hover:outline-none rounded-xl bg-gray-400 text-gray-900 focus:outline-none resize-none p-2 h-[400px]">
+                    </div>
+                </div>
             </div>
-            <ButtonSubmit v-if="input.length > 0" @click="modalOpened = true" class="shadow" />
+
+            <TheExplanation class="shadow " :result="result" />
         </div>
 
+        <teleport to="body">
 
-        <div class="bg-gray-800 p-1 shadow rounded-xl">
-            <div contenteditable="true" ref="editable" v-html="highlightedText" @input="setText($event)" spellcheck="false"
-                class=" w-full hover:outline-none rounded-xl bg-gray-400 text-gray-900 focus:outline-none resize-none p-2 h-[400px]">
-            </div>
+            <TitleModal :modalOpened="modalOpened" @saveAndClose="postNewRegex" @close="modalOpened = false">
+            </TitleModal>
 
-
-
-        </div>
-
-
+        </teleport>
     </div>
-    <TheExplanation class="shadow " :result="result" />
-    <teleport to="body">
-        <TitleModal v-if="modalOpened" @saveAndClose="postNewRegex" @close="modalOpened = false"></TitleModal>
-    </teleport>
 </template>
 
 <script setup>
@@ -41,14 +44,11 @@ definePageMeta({
     middleware: 'auth'
 })
 
-
-
-
 const setText = (event) => {
 
     text.value = event.target.innerText
     selection.value = document.getSelection().focusOffset
-    console.log(document.getSelection())
+
     nextTick(() => {
         if (selection.value !== null) {
             setCaretPosition()
@@ -63,20 +63,15 @@ const setCaretPosition = () => {
     const sel = window.getSelection();
 
     childElement.value = editable.value.lastChild;
-    console.log('selection beginning', selection.value)
-    console.log('leng', childElement.value.length)
+
     if (childElement.value.length <= 1 || childElement.value === undefined) {
-        console.log('second if', selection.value)
         selection.value = 1
     } else if (childElement.value.length === undefined) {
         childElement.value = childElement.value.lastChild
-        console.log('third if', childElement.value.length)
         if (childElement.value.length === undefined) {
-            console.log(editable.value.lastChild)
             selection.value = 1
         } else if (selection.value > childElement.value.length) {
             selection.value = 1
-            console.log('last', childElement.value)
         }
     }
     if (selection.value < childElement.value.length) {
@@ -102,7 +97,7 @@ watch([text, input], () => {
             highlightedText.value = text.value
 
         } else {
-            console.log(result.value)
+
             highlightedText.value = text.value.replace(result.value[0], `<span class="bg-yellow-200">${result.value[0]}</span>`)
 
             if (result.value.groups !== undefined) {
@@ -135,14 +130,52 @@ const postNewRegex = async (value) => {
 }
 
 
+
+
 </script>
 
 <style scoped>
-input:focus {
-    box-shadow: 0 10px 10px 0 cyan 0 10px 10px 0 cyan;
+.input:focus {
+    animation-name: inputExtend;
+    animation-fill-mode: forwards;
+    animation-duration: 300ms;
+
+
+}
+
+.enter {
+    animation: enter 500ms forwards
+}
+
+@keyframes enter {
+    from {
+        filter: blur(0.5rem);
+        opacity: 0
+    }
+
+    to {
+        opacity: 1;
+        filter: blur(0)
+    }
+}
+
+.input:hover {
+    box-shadow: 0 2px 10px 0 rgb(0, 0, 0), 0 5px 25px 0 rgb(0, 0, 0);
 }
 
 .shadow {
     box-shadow: 0 6px 10px 0 rgb(0, 0, 0), 0 10px 25px 0 rgb(0, 0, 0);
+}
+
+@keyframes inputExtend {
+    from {
+
+        width: 20%
+    }
+
+    to {
+        width: 40%;
+
+    }
 }
 </style>

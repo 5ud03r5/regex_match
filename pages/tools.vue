@@ -4,8 +4,8 @@
             <LoadingSpinner></LoadingSpinner>
         </div>
         <div v-else
-            class="bg-gray-800 text-gray-200 ml-4 mr-4 mb-4 p-5 shadow rounded-lg shadow-2xl overflow-hidden flex flex-col space-y-2 w-[200px] h-max"
-            v-for="tool in tools">
+            class="itemRepo bg-gray-800 text-gray-200 ml-4 mr-4 mb-4 p-5 shadow rounded-lg shadow-2xl overflow-hidden flex flex-col space-y-2 w-[200px] h-max"
+            :style="{ animationDuration: index + '99ms' }" v-for=" tool, index in tools">
             <a :href="tool.url"
                 class="bg-gray-200 text-gray-800 w-max p-2 shadowCyan rounded-md font-mono hover:bg-gray-900 hover:text-cyan-300"
                 target="_blank">{{
@@ -21,14 +21,25 @@
 const { data: tools, pending } = await useLazyAsyncData('tools', async () => await $fetch('/api/tools'))
 
 definePageMeta({
-    middleware: 'auth'
+    middleware: 'auth',
+    pageTransition: false
 })
-
-
-
 </script>
-
 <style scoped>
+.itemRepo {
+    animation-name: repoItem;
+}
+
+@keyframes repoItem {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
 .shadow {
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 25px 0 rgba(0, 0, 0, 0.19);
 }

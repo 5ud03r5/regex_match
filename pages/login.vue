@@ -1,9 +1,12 @@
 <template>
-    <div v-if="!user" class="flex flex-col justify-center mx-auto items-center space-y-10">
-        <h2 class="text-[30px] font-sans font-black">Sign in to access regex match app</h2>
+    <div
+        class="shadow-xl rounded-lg bg-gray-800 w-[400px] pt-0 p-6 pl-0 pr-0 flex flex-col justify-center mx-auto items-center space-y-10">
+        <h2
+            class="text-[30px] font-sans font-black text-gray-900 bg-cyan-500 w-full flex justify-center pt-4 pb-4 rounded-t-lg shadow-xl">
+            Sign in</h2>
 
         <div @click="auth.signInWithOAuth({ provider: 'github' })"
-            class="hover:shadow-xl hover:cursor-pointer rounded-md bg-gray-900 flex flex-col space-y-3 w-max mx-auto items-center p-4 text-white">
+            class="hover:shadow-xl hover:cursor-pointer rounded-md bg-gray-900 flex space-x-3 w-max mx-auto shadow-xl items-center p-4 text-gray-200 hover:bg-gray-800 hover:text-cyan-200 item">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-github "
                     viewBox="0 0 16 16">
@@ -14,14 +17,14 @@
 
             <div>Login with GitHub</div>
         </div>
+
+
     </div>
 </template>
 
 <script setup>
 const user = useSupabaseUser()
 const { auth } = useSupabaseAuthClient()
-const router = useRouter()
-
 watchEffect(() => {
     if (user.value) {
         navigateTo('/')
@@ -33,3 +36,19 @@ watchEffect(() => {
 
 
 </script>
+
+<style scoped>
+.item:hover {
+    animation: shadow 2s infinite alternate
+}
+
+@keyframes shadow {
+    from {
+        box-shadow: 1px 0px 4px 0 cyan, 1px 0px 15px 1px cyan;
+    }
+
+    to {
+        box-shadow: -1px 0px 10px 1px cyan, 3px 0px 20px 4px cyan;
+    }
+}
+</style>

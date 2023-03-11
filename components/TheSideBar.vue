@@ -1,7 +1,5 @@
 <template>
-    <div class="h-max p-2 rounded-lg z-[1] fixed bg-gay-800 w-[62px] flex flex-col shadow space-y-2 bg-gray-700 ">
-
-
+    <div class="side h-max p-2 rounded-lg z-[1] fixed bg-gay-800 w-[62px] flex flex-col shadow space-y-2 bg-gray-700 ">
         <NuxtLink to='/' title="regex"
             class="bg-gray-100 p-2 rounded-md hover:shadow-lg hover:cursor-pointer hover:bg-gray-400">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-regex"
@@ -24,20 +22,31 @@
                 <path fill-rule="evenodd"
                     d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.004-.001.274-.11a.75.75 0 0 1 .558 0l.274.11.004.001 6.971 2.789Zm-1.374.527L8 5.962 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339Z" />
             </svg></NuxtLink>
-
-
-
     </div>
 </template>
 
 <script setup>
 
 
-definePageMeta({
-    middleware: 'auth'
-})
+
 </script>
 <style scoped>
+.side {
+    animation: sideAnim 1s forwards
+}
+
+@keyframes sideAnim {
+    from {
+        opacity: 0;
+        top: 0px
+    }
+
+    to {
+        opacity: 1;
+        top: 128px
+    }
+}
+
 .router-link-active {
     color: cyan;
     background-color: rgb(6, 0, 29);
